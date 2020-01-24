@@ -86,7 +86,7 @@ $data_category = $category->show_data();
 							            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Item</a>
 							        </li>
 							    </ul>
-							    <div class="tab-content Recent-Users" id="myTabContent">
+							    <div class="tab-content" id="myTabContent">
 							        <div class="tab-pane fade active show" id="user" role="tabpanel" aria-labelledby="home-tab">
 							            <table class="table table-hover">
 							                <thead>
@@ -94,7 +94,6 @@ $data_category = $category->show_data();
 							                        <th>No</th>
 							                        <th>Name</th>
                                                     <th>Email</th>
-						                            <th>Action</th>
 						                        </tr>
 						                    </thead>
 						                    <tbody>
@@ -106,10 +105,6 @@ $data_category = $category->show_data();
 						                            <th scope="row"><?= $no++ ?></th>
 						                            <td><?= $row['name']; ?></td>
                                                     <td><?= $row['email']; ?></td>
-						                            <td>
-						                            	<a href="edit.php?id=<?=$row['id']?>" class="label theme-bg2 text-white f-12">Edit</a>
-						                            	<a href="process.php?id=<?=$row['id']?>&action=delete" class="label theme-bg text-white f-12">Delete</a>
-						                            </td>
 						                        </tr>
 						                        <?php 
 						                        }
@@ -124,7 +119,6 @@ $data_category = $category->show_data();
 						                        <tr>
 						                            <th>No</th>
 						                            <th>Name</th>
-						                            <th>Action</th>
 						                        </tr>
 						                    </thead>
 						                    <tbody>
@@ -135,10 +129,6 @@ $data_category = $category->show_data();
 						                        <tr>
 						                            <th scope="row"><?= $no++ ?></th>
 						                            <td><?= $row['name']; ?></td>
-						                            <td>
-						                            	<a href="edit.php?id=<?=$row['id']?>" class="label theme-bg2 text-white f-12">Edit</a>
-						                            	<a href="process.php?id=<?=$row['id']?>&action=delete" class="label theme-bg text-white f-12">Delete</a>
-						                            </td>
 						                        </tr>
 						                        <?php 
 						                        }
@@ -156,7 +146,6 @@ $data_category = $category->show_data();
 						                            <th>Category</th>
                                                     <th>Price</th>
                                                     <th>Stock</th>
-						                            <th>Action</th>
 						                        </tr>
 						                    </thead>
 						                    <tbody>
@@ -170,10 +159,6 @@ $data_category = $category->show_data();
 						                            <td><?= $row['category']; ?></td>
                                                     <td><?= $row['price']; ?></td>
                                                     <td><?= ($row['stock']>=1 ? "<i class='fas fa-circle text-c-green f-10'> </i> " : "<i class='fas fa-circle text-c-red f-10'> </i> ") . $row['stock'];?></td>
-						                            <td>
-						                            	<a href="edit.php?id=<?=$row['id']?>" class="label theme-bg2 text-white f-12">Edit</a>
-						                            	<a href="process.php?id=<?=$row['id']?>&action=delete" class="label theme-bg text-white f-12">Delete</a>
-						                            </td>
 						                        </tr>
 						                        <?php 
 						                        }
