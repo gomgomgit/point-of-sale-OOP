@@ -1,3 +1,8 @@
+<?php 
+session_start();
+if (isset($_SESSION['email'])) {
+
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -70,16 +75,16 @@
                                                     <form method="post" action="process.php?action=add">
                                                         <div class="form-group">
                                                             <label for="nameInput">Name</label>
-                                                            <input type="text" class="form-control" id="nameInput" name="name" aria-describedby="emailHelp" placeholder="Enter Your name">
+                                                            <input type="text" class="form-control" id="nameInput" name="name" aria-describedby="emailHelp" placeholder="Enter Your name" required >
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="emailInput">Email</label>
-                                                            <input type="email" class="form-control" id="emailInput" name="email" aria-describedby="emailHelp" placeholder="Enter Your Email">
+                                                            <input type="email" class="form-control" id="emailInput" name="email" aria-describedby="emailHelp" placeholder="Enter Your Email" required >
                                                             <small id="emailHelp" class="form-text text-muted">Fill with your active email.</small>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="passwordInput">Password</label>
-                                                            <input type="password" class="form-control" id="passwordInput" name="password" aria-describedby="passwordHelp" placeholder="Enter your password">
+                                                            <input type="password" class="form-control" id="passwordInput" name="password" aria-describedby="passwordHelp" placeholder="Enter your password" required >
                                                             <small id="passwordHelp" class="form-text text-muted">We never showing your password on the pages.</small>
                                                         </div>
                                                         <button type="submit" class="btn btn-primary">Submit</button>
@@ -160,3 +165,8 @@
 
 </body>
 </html>
+<?php 
+} else { 
+    header('location:../authentication/login.php');
+}
+?>

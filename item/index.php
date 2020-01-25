@@ -1,7 +1,10 @@
 <?php 
+session_start();
 require '../config/ItemProcess.php';
 
 use point_of_sale\config\Item;
+
+if (isset($_SESSION['email'])) {
 
 $item = new Item;
 $data_item = $item->show_data();
@@ -180,3 +183,8 @@ $data_item = $item->show_data();
 
 </body>
 </html>
+<?php 
+} else { 
+    header('location:../authentication/login.php');
+}
+?>

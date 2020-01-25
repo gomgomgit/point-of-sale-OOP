@@ -1,7 +1,10 @@
 <?php 
+session_start();
 require '../config/UserProcess.php';
 
 use point_of_sale\config\User;
+
+if (isset($_SESSION['email'])) {
 
 $user = new User;
 $data_user = $user->show_data();
@@ -176,3 +179,8 @@ $data_user = $user->show_data();
 
 </body>
 </html>
+<?php 
+} else { 
+    header('location:../authentication/login.php');
+}
+?>

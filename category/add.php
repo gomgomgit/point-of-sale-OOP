@@ -1,3 +1,9 @@
+<?php 
+session_start();
+if (isset($_SESSION['email'])) {
+
+ ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -70,7 +76,7 @@
                                                     <form method="post" action="process.php?action=edit">
                                                         <div class="form-group">
                                                             <label for="nameInput">Name</label>
-                                                            <input type="text" class="form-control" id="nameInput" name="name" aria-describedby="emailHelp" placeholder="Enter Category Name">
+                                                            <input type="text" class="form-control" id="nameInput" name="name" aria-describedby="emailHelp" placeholder="Enter Category Name" required>
                                                             <small id="emailHelp" class="form-text text-muted">Fill with category name of menu.</small>
                                                         </div>
                                                         <button type="submit" class="btn btn-primary">Submit</button>
@@ -151,3 +157,8 @@
 
 </body>
 </html>
+<?php 
+} else { 
+    header('location:../authentication/login.php');
+}
+?>

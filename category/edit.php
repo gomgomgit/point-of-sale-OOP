@@ -1,8 +1,11 @@
 <?php 
+session_start();
 require '../config/CategoryProcess.php';
 
 use point_of_sale\config\Category;
 
+if (isset($_SESSION['email'])) {
+    
 $id = $_GET['id'];
 $category = new Category;
 
@@ -82,7 +85,7 @@ $row_category = $category->get_by_id($id);
                                                     	<input type="hidden" name="id" value="<?= $id; ?>">
                                                         <div class="form-group">
                                                             <label for="nameInput">Name</label>
-                                                            <input type="text" class="form-control" id="nameInput" name="name" aria-describedby="emailHelp" value="<?= $row_category['name'] ?>" placeholder="Enter Category Name">
+                                                            <input type="text" class="form-control" id="nameInput" name="name" aria-describedby="emailHelp" value="<?= $row_category['name'] ?>" placeholder="Enter Category Name" required>
                                                             <small id="emailHelp" class="form-text text-muted">Fill with category name of menu.</small>
                                                         </div>
                                                         <button type="submit" class="btn btn-primary">Submit</button>
@@ -163,3 +166,8 @@ $row_category = $category->get_by_id($id);
 
 </body>
 </html>
+<?php 
+} else { 
+    header('location:../authentication/login.php');
+}
+?>

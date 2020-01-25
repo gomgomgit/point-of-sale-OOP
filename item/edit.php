@@ -1,9 +1,12 @@
 <?php 
+session_start();
 require '../config/ItemProcess.php';
 require '../config/CategoryProcess.php';
 
 use point_of_sale\config\Item;
 use point_of_sale\config\Category;
+
+if (isset($_SESSION['email'])) {
 
 $id = $_GET['id'];
 
@@ -88,12 +91,12 @@ $data_category = $category->show_data();
                                                     	<input type="hidden" name="id" value="<?= $id ?>">
                                                         <div class="form-group">
                                                             <label for="nameInput">Name</label>
-                                                            <input type="text" class="form-control" id="nameInput" name="name" aria-describedby="emailHelp" value="<?= $row_item['name'] ?>" placeholder="Enter Item Name">
+                                                            <input type="text" class="form-control" id="nameInput" name="name" aria-describedby="emailHelp" value="<?= $row_item['name'] ?>" placeholder="Enter Item Name" required >
                                                             <small id="emailHelp" class="form-text text-muted">Fill with name of menu.</small>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="categorySelect">Category</label>
-                                                            <select class="form-control" id="categorySelect" name="category">
+                                                            <select class="form-control" id="categorySelect" name="category" required>
                                                                 <?php 
                                                                 foreach ($data_category as $category) {
                                                                 ?>
@@ -105,12 +108,12 @@ $data_category = $category->show_data();
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="price">Price</label>
-                                                            <input type="number" class="form-control" id="price" name="price" aria-describedby="priceHelp" value="<?= $row_item['price'] ?>" placeholder="Enter the price">
+                                                            <input type="number" class="form-control" id="price" name="price" aria-describedby="priceHelp" value="<?= $row_item['price'] ?>" placeholder="Enter the price" required >
                                                             <small id="priceHelp" class="form-text text-muted">Fill with price of menu.</small>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="stockInput">Stock</label>
-                                                            <input type="number" class="form-control" id="stockInput" name="stock" aria-describedby="stockHelp" value="<?= $row_item['stock'] ?>" placeholder="Enter Stock Item">
+                                                            <input type="number" class="form-control" id="stockInput" name="stock" aria-describedby="stockHelp" value="<?= $row_item['stock'] ?>" placeholder="Enter Stock Item" required >
                                                             <small id="stockHelp" class="form-text text-muted">Fill with stock of menu.</small>
                                                         </div>
                                                         <button type="submit" class="btn btn-primary">Submit</button>
@@ -191,3 +194,8 @@ $data_category = $category->show_data();
 
 </body>
 </html>
+<?php 
+} else { 
+    header('location:../authentication/login.php');
+}
+?>

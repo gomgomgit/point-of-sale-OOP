@@ -1,7 +1,10 @@
 <?php 
+session_start();
 require '../config/CategoryProcess.php';
 
 use point_of_sale\config\Category;
+
+if (isset($_SESSION['email'])) {
 
 $category = new Category;
 $data_category = $category->show_data();
@@ -174,3 +177,8 @@ $data_category = $category->show_data();
 
 </body>
 </html>
+<?php 
+} else { 
+    header('location:../authentication/login.php');
+}
+?>

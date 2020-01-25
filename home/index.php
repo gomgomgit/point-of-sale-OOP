@@ -1,4 +1,6 @@
 <?php 
+session_start();
+
 require '../config/CategoryProcess.php';
 require '../config/UserProcess.php';
 require '../config/ItemProcess.php';
@@ -7,13 +9,14 @@ use point_of_sale\config\Category;
 use point_of_sale\config\User;
 use point_of_sale\config\Item;
 
+if (isset($_SESSION['email'])) {
+
 $category = new Category;
 $user = new User;
 $item = new Item;
 $data_user = $user->show_data();
 $data_item = $item->show_data();
 $data_category = $category->show_data();
-
 ?>
 
 <!DOCTYPE html>
@@ -238,3 +241,8 @@ $data_category = $category->show_data();
 
 </body>
 </html>
+<?php 
+} else { 
+    header('location:../authentication/login.php');
+}
+?>
