@@ -39,7 +39,7 @@
                 <li data-username="Authentication Sign up Sign in reset password Change password Personal information profile settings map form subscribe" class="nav-item pcoded-hasmenu order-nav">
                     <a href="javascript:" class="nav-link"><span class="pcoded-micon"><i class="feather icon-shopping-cart"></i></span><span class="pcoded-mtext">Order</span></a>
                     <ul class="pcoded-submenu">
-                        <li class=""><a href="auth-signup.html" class="" target="_blank">Order</a></li>
+                        <li class=""><a href="../order/index.php" class="" target="_blank">Order</a></li>
                         <li class=""><a href="auth-signin.html" class="" target="_blank">Order Detail</a></li>
                     </ul>
                 </li>
