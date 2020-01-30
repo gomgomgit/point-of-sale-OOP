@@ -3,7 +3,7 @@ require '../config/ItemProcess.php';
 
 use point_of_sale\config\Item;
 
-$item = new item;
+$item = new Item;
 $action = $_GET['action'];
 
 if ($action == "add") {

@@ -73,7 +73,7 @@ if (isset($_SESSION['email'])) {
                                             <hr>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <form method="post" action="process.php?action=edit">
+                                                    <form method="post" action="process.php?action=add">
                                                         <div class="form-group">
                                                             <label for="nameInput">Name</label>
                                                             <input type="text" class="form-control" id="nameInput" name="name" aria-describedby="emailHelp" placeholder="Enter Category Name" required>

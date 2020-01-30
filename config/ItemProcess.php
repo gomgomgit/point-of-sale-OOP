@@ -12,6 +12,24 @@ class Item extends Database
 	public function show_data()
 	{
 		$query = mysqli_query($this->connect, "SELECT item.*, category.name as category FROM item INNER JOIN category ON item.category_id = category.id");
+		// $query = mysqli_query($this->connect, "SELECT * FROM item");
+		while ($row = mysqli_fetch_array($query)) {
+			$data[] = $row;
+		}
+		return $data;
+	}
+	public function show_available()
+	{
+		$query = mysqli_query($this->connect, "SELECT item.*, category.name as category FROM item INNER JOIN category ON item.category_id = category.id WHERE NOT stock = '0'");
+		// $query = mysqli_query($this->connect, "SELECT * FROM item");
+		while ($row = mysqli_fetch_array($query)) {
+			$data[] = $row;
+		}
+		return $data;
+	}
+	public function item_with_category_available($id)
+	{
+		$query = mysqli_query($this->connect, "SELECT * FROM item WHERE category_id = '$id' AND NOT stock = 0");
 		while ($row = mysqli_fetch_array($query)) {
 			$data[] = $row;
 		}
@@ -25,6 +43,13 @@ class Item extends Database
 	{
 		$query = mysqli_query($this->connect, "SELECT item.*, category.name as category FROM item INNER JOIN category ON item.category_id = category.id WHERE item.id='$id'");
 		return $query->fetch_array();
+	}
+	public function get_category($id)
+	{
+		$query = mysqli_query($this->connect, "SELECT * FROM category WHERE id='$id'");
+		$row = mysqli_fetch_array($query);
+		
+		return $row;
 	}
 	public function update_data($id, $category, $name, $price, $stock)
 	{

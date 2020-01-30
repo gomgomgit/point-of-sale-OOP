@@ -1,20 +1,20 @@
 <?php 
 session_start();
 require '../config/OrderProcess.php';
-require '../config/TableProcess.php';
+require '../config/ItemProcess.php';
 
 use point_of_sale\config\Order;
-use point_of_sale\config\Table;
+use point_of_sale\config\Item;
 
 if (isset($_SESSION['email'])) {
 
+$id = $_GET['id'];
+
 $order = new Order;
-$data_order = $order->show_order();
-
-$table = new Table;
+$row_order = $order->get_by_id($id);
 
 
-?>
+ ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,9 +24,9 @@ $table = new Table;
     <!-- HTML5 Shim and Respond.js IE11 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 11]>
-		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-		<![endif]-->
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
     <!-- Meta -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
@@ -73,57 +73,47 @@ $table = new Table;
                         <div class="page-wrapper">
                             <!-- [ Main Content ] start -->
                             
-							<!-- [ Table ] start -->
-							<div class="col-xl-12">
-							    <div class="card Recent-Users">
-							        <div class="card-header">
-							            <h5>Order</h5>
-							        </div>
-							        <div class="card-block table-border-style">
-							        	<button class="btn btn-primary"><a class="text-light" href="add_order.php"><i class="feather icon-plus"></i> Add Order</a></button>
-							            <div class="table-responsive">
-							                <table class="table table-hover">
-							                    <thead>
-							                        <tr>
-							                            <th>No</th>
-                                                        <th>Table</th>
-                                                        <th>User</th>
-                                                        <th>Total</th>
-                                                        <th>Date</th>
-                                                        <th>Detail</th>
-                                                        <th>Action</th>
-							                        </tr>
-							                    </thead>
-							                    <tbody>
-							                        <?php 
-							                        $no = 1;
-							                        foreach ($data_order as $row) {
-                                                        $table_row = $table->get_by_id($row['table_number']);
-							                        ?>
-							                        <tr>
-							                            <th scope="row"><?= $no++ ?></th>
-                                                        <td><?= $table_row['number']; ?> : with <?=$table_row['seats']?> seats</td>
-                                                        <td><?= $row['user']; ?></td>
-                                                        <td><?= $row['total']; ?></td>
-                                                        <td><?= $row['date'];?></td>
-							                            <td>
-							                            	<a href="detail.php?id=<?=$row['id']?>" class="label theme-bg2 text-white f-12">Detail</a>
-							                            </td>
-                                                        <td>
-                                                            <a href="edit.php?id=<?=$row['id']?>" class="label theme-bg2 text-white f-12">Edit</a>
-                                                            <a href="process.php?id=<?=$row['id']?>&action=delete" class="label theme-bg text-white f-12">Delete</a>
-                                                        </td>
-							                        </tr>
-							                        <?php 
-							                        }
-							                        ?>
-							                    </tbody>
-							                </table>
-							            </div>
-							        </div>
-							    </div>
-							</div>
-							<!-- [ Table ] end -->							
+                            <!-- [ Table ] start -->
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>Order</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <h5>Add Order</h5>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <form method="post" action="process.php?action=edit">
+                                                    	<input type="hidden" name="id" value="<?= $id ?>">
+                                                        <div class="form-group">
+                                                            <label for="nameInput">Table</label>
+                                                            <input type="text" class="form-control" id="nameInput" name="table" aria-describedby="emailHelp" value="<?= $row_order['table_number'] ?>" placeholder="Enter Item Name" required >
+                                                            <small id="emailHelp" class="form-text text-muted">Fill with name of menu.</small>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="userSelect">User</label>
+                                                            <select class="form-control" id="userSelect" name="user" required>
+                                                                <?php 
+                                                                foreach ($data_user as $user) {
+                                                                ?>
+                                                                <option <?= ($row_order['user_id'] == $user['id']?"selected" : ""); ?> value="<?=$user['id']?>"><?=$user['name']?></option>
+                                                                <?php   
+                                                                }
+                                                                ?>
+                                                            </select>
+                                                        </div>
+                                                        <input type="hidden" name="date" value="<?= $row_order['date'] ?>">
+                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- [ Table ] end -->                          
 
                             <!-- [ Main Content ] end -->
                         </div>
@@ -182,8 +172,8 @@ $table = new Table;
     <!-- Warning Section Ends -->
 
     <!-- Required Js -->
-	<script src="../datta-lite/assets/js/vendor-all.min.js"></script>
-	<script src="../datta-lite/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../datta-lite/assets/js/vendor-all.min.js"></script>
+    <script src="../datta-lite/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="../datta-lite/assets/js/pcoded.min.js"></script>
     <script>
         $('document').ready(function(){

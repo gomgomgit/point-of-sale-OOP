@@ -1,13 +1,26 @@
 <?php 
 session_start();
+require '../config/OrderProcess.php';
 require '../config/UserProcess.php';
+require '../config/TableProcess.php';
 
+use point_of_sale\config\Order;
 use point_of_sale\config\User;
+use point_of_sale\config\Table;
 
 if (isset($_SESSION['email'])) {
 
+$id = $_GET['id'];
+
+$order = new Order;
+$row_order = $order->get_by_id($id);
+
 $user = new User;
 $data_user = $user->show_data();
+
+$table = new Table;
+$table_ava = $table->show_available();
+$table_now = $table->get_by_id($row_order['table_number']);
 
  ?>
 
@@ -80,25 +93,35 @@ $data_user = $user->show_data();
                                             <hr>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <form method="post" action="process.php?action=add">
+                                                    <form method="post" action="process.php?action=edit">
+                                                    	<input type="hidden" name="id" value="<?= $id ?>">
+                                                        <input type="hidden" name="table-past" value="<?=$table_now['id']?>">
                                                         <div class="form-group">
-                                                            <label for="tableInput">Table Number</label>
-                                                            <input type="text" class="form-control" id="tableInput" name="table" aria-describedby="emailHelp" placeholder="Enter Order table" required>
-                                                            <small id="emailHelp" class="form-text text-muted">Fill with table of menu.</small>
+                                                            <label for="tableInput">Table Number : </label>
+                                                            <select type="text" class="form-control" id="tableInput" name="table" aria-describedby="emailHelp" placeholder="Enter Table Number" required>
+                                                                <option value="<?=$table_now['id']?>"><?=$table_now['number']?></option>
+                                                                <?php 
+                                                                foreach ($table_ava as $ava) {
+                                                                ?>
+                                                                <option value="<?=$ava['id']?>"><?=$ava['number']?></option>
+                                                                <?php
+                                                                }
+                                                                ?>
+                                                            </select>
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="categorySelect">User</label>
-                                                            <select class="form-control" id="categorySelect" name="category" required>
-                                                                <option value="" selected >-- Choose category --</option>
+                                                            <label for="userSelect">User</label>
+                                                            <select class="form-control" id="userSelect" name="user" required>
                                                                 <?php 
                                                                 foreach ($data_user as $user) {
                                                                 ?>
-                                                                <option value="<?=$user['id']?>"><?=$user['name']?></option>
+                                                                <option <?= ($row_order['user_id'] == $user['id']?"selected" : ""); ?> value="<?=$user['id']?>"><?=$user['name']?></option>
                                                                 <?php   
                                                                 }
                                                                 ?>
                                                             </select>
                                                         </div>
+                                                        <input type="hidden" name="date" value="<?= $row_order['date'] ?>">
                                                         <button type="submit" class="btn btn-primary">Submit</button>
                                                     </form>
                                                 </div>

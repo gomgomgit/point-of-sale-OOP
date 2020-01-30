@@ -1,18 +1,13 @@
 <?php 
 session_start();
-require '../config/OrderProcess.php';
 require '../config/TableProcess.php';
 
-use point_of_sale\config\Order;
 use point_of_sale\config\Table;
 
 if (isset($_SESSION['email'])) {
 
-$order = new Order;
-$data_order = $order->show_order();
-
 $table = new Table;
-
+$data_table = $table->show_data();
 
 ?>
 
@@ -77,42 +72,35 @@ $table = new Table;
 							<div class="col-xl-12">
 							    <div class="card Recent-Users">
 							        <div class="card-header">
-							            <h5>Order</h5>
+							            <h5>TABLE</h5>
 							        </div>
 							        <div class="card-block table-border-style">
-							        	<button class="btn btn-primary"><a class="text-light" href="add_order.php"><i class="feather icon-plus"></i> Add Order</a></button>
+							        	<button class="btn btn-primary"><a class="text-light" href="add.php">Add Table</a></button>
 							            <div class="table-responsive">
 							                <table class="table table-hover">
 							                    <thead>
 							                        <tr>
 							                            <th>No</th>
-                                                        <th>Table</th>
-                                                        <th>User</th>
-                                                        <th>Total</th>
-                                                        <th>Date</th>
-                                                        <th>Detail</th>
+							                            <th>Table Number</th>
+                                                        <th>Seats</th>
+							                            <th>Status</th>
                                                         <th>Action</th>
 							                        </tr>
 							                    </thead>
 							                    <tbody>
 							                        <?php 
 							                        $no = 1;
-							                        foreach ($data_order as $row) {
-                                                        $table_row = $table->get_by_id($row['table_number']);
+							                        foreach ($data_table as $row) {
 							                        ?>
 							                        <tr>
 							                            <th scope="row"><?= $no++ ?></th>
-                                                        <td><?= $table_row['number']; ?> : with <?=$table_row['seats']?> seats</td>
-                                                        <td><?= $row['user']; ?></td>
-                                                        <td><?= $row['total']; ?></td>
-                                                        <td><?= $row['date'];?></td>
+							                            <td><?= $row['number']; ?></td>
+                                                        <td><?= $row['seats']; ?></td>
+                                                        <td><?= ($row['status'])?"<i class='fas fa-circle text-c-green f-10'> </i> Available":"<i class='fas fa-circle text-c-red f-10'> </i> Not Available"; ?></td>
 							                            <td>
-							                            	<a href="detail.php?id=<?=$row['id']?>" class="label theme-bg2 text-white f-12">Detail</a>
+							                            	<a href="edit.php?id=<?=$row['id']?>" class="label theme-bg2 text-white f-12">Edit</a>
+							                            	<a href="process.php?id=<?=$row['id']?>&action=delete" class="label theme-bg text-white f-12">Delete</a>
 							                            </td>
-                                                        <td>
-                                                            <a href="edit.php?id=<?=$row['id']?>" class="label theme-bg2 text-white f-12">Edit</a>
-                                                            <a href="process.php?id=<?=$row['id']?>&action=delete" class="label theme-bg text-white f-12">Delete</a>
-                                                        </td>
 							                        </tr>
 							                        <?php 
 							                        }
@@ -187,7 +175,7 @@ $table = new Table;
     <script src="../datta-lite/assets/js/pcoded.min.js"></script>
     <script>
         $('document').ready(function(){
-            $(".order-nav").addClass("active");
+            $(".table-nav").addClass("active");
         });
     </script>
 

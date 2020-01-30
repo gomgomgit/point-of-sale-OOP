@@ -92,13 +92,15 @@ $data_item = $item->show_data();
 							                        <?php 
 							                        $no = 1;
 							                        foreach ($data_item as $row) {
+                                                    $get_category = $item->get_category($row['category_id']);
 							                        ?>
 							                        <tr>
 							                            <th scope="row"><?= $no++ ?></th>
                                                         <td><?= $row['name']; ?></td>
 							                            <td><?= $row['category']; ?></td>
-                                                        <td><?= $row['price']; ?></td>
-                                                        <td><?= ($row['stock']>=1 ? "<i class='fas fa-circle text-c-green f-10'> </i> " : "<i class='fas fa-circle text-c-red f-10'> </i> ") . $row['stock'];?></td>
+                                                        <!-- <td><?= $get_category['name']; ?></td> -->
+                                                        <td>Rp. <?= $row['price']; ?></td>
+                                                        <td><?= ($row['stock']>=10 ? "<i class='fas fa-circle text-c-green f-10'> </i> " : "<i class='fas fa-circle text-c-red f-10'> </i> ") . $row['stock'];?></td>
 							                            <td>
 							                            	<a href="edit.php?id=<?=$row['id']?>" class="label theme-bg2 text-white f-12">Edit</a>
 							                            	<a href="process.php?id=<?=$row['id']?>&action=delete" class="label theme-bg text-white f-12">Delete</a>

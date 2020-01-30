@@ -141,33 +141,35 @@ $data_category = $category->show_data();
 
 							        </div>
 							        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-							            <table class="table table-hover">
-						                    <thead>
-						                        <tr>
-							                        <th>No</th>
-                                                    <th>Name</th>
-						                            <th>Category</th>
-                                                    <th>Price</th>
-                                                    <th>Stock</th>
-						                        </tr>
-						                    </thead>
-						                    <tbody>
-						                        <?php 
-						                        $no = 1;
-						                        foreach ($data_item as $row) {
-						                        ?>
-						                        <tr>
-						                            <th scope="row"><?= $no++ ?></th>
-                                                    <td><?= $row['name']; ?></td>
-						                            <td><?= $row['category']; ?></td>
-                                                    <td><?= $row['price']; ?></td>
-                                                    <td><?= ($row['stock']>=1 ? "<i class='fas fa-circle text-c-green f-10'> </i> " : "<i class='fas fa-circle text-c-red f-10'> </i> ") . $row['stock'];?></td>
-						                        </tr>
-						                        <?php 
-						                        }
-						                        ?>
-						                    </tbody>
-						                </table>
+                                                                                <table class="table table-hover">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            <th>No</th>
+                                                                                            <th>Name</th>
+                                                                                            <th>Category</th>
+                                                                                            <th>Price</th>
+                                                                                            <th>Stock</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        <?php 
+                                                                                        $no = 1;
+                                                                                        foreach ($data_item as $row) {
+                                                                                        $get_category = $item->get_category($row['category_id']);
+                                                                                        ?>
+                                                                                        <tr>
+                                                                                            <th scope="row"><?= $no++ ?></th>
+                                                                                            <td><?= $row['name']; ?></td>
+                                                                                            <!-- <td><?= $row['category']; ?></td> -->
+                                                                                            <td><?= $get_category['name']; ?></td>
+                                                                                            <td><?= $row['price']; ?></td>
+                                                                                            <td><?= ($row['stock']>=10 ? "<i class='fas fa-circle text-c-green f-10'> </i> " : "<i class='fas fa-circle text-c-red f-10'> </i> ") . $row['stock'];?></td>
+                                                                                        </tr>
+                                                                                        <?php 
+                                                                                        }
+                                                                                        ?>
+                                                                                    </tbody>
+                                                                                </table>
 							        </div>
 							    </div>
 							</div>

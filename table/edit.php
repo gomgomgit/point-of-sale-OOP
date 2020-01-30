@@ -1,21 +1,18 @@
 <?php 
 session_start();
-require '../config/OrderProcess.php';
+
 require '../config/TableProcess.php';
 
-use point_of_sale\config\Order;
 use point_of_sale\config\Table;
 
 if (isset($_SESSION['email'])) {
 
-$order = new Order;
-$data_order = $order->show_order();
-
 $table = new Table;
 
+$id = $_GET['id'];
+$table_row = $table->get_by_id($id);
 
-?>
-
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -74,55 +71,47 @@ $table = new Table;
                             <!-- [ Main Content ] start -->
                             
 							<!-- [ Table ] start -->
-							<div class="col-xl-12">
-							    <div class="card Recent-Users">
-							        <div class="card-header">
-							            <h5>Order</h5>
-							        </div>
-							        <div class="card-block table-border-style">
-							        	<button class="btn btn-primary"><a class="text-light" href="add_order.php"><i class="feather icon-plus"></i> Add Order</a></button>
-							            <div class="table-responsive">
-							                <table class="table table-hover">
-							                    <thead>
-							                        <tr>
-							                            <th>No</th>
-                                                        <th>Table</th>
-                                                        <th>User</th>
-                                                        <th>Total</th>
-                                                        <th>Date</th>
-                                                        <th>Detail</th>
-                                                        <th>Action</th>
-							                        </tr>
-							                    </thead>
-							                    <tbody>
-							                        <?php 
-							                        $no = 1;
-							                        foreach ($data_order as $row) {
-                                                        $table_row = $table->get_by_id($row['table_number']);
-							                        ?>
-							                        <tr>
-							                            <th scope="row"><?= $no++ ?></th>
-                                                        <td><?= $table_row['number']; ?> : with <?=$table_row['seats']?> seats</td>
-                                                        <td><?= $row['user']; ?></td>
-                                                        <td><?= $row['total']; ?></td>
-                                                        <td><?= $row['date'];?></td>
-							                            <td>
-							                            	<a href="detail.php?id=<?=$row['id']?>" class="label theme-bg2 text-white f-12">Detail</a>
-							                            </td>
-                                                        <td>
-                                                            <a href="edit.php?id=<?=$row['id']?>" class="label theme-bg2 text-white f-12">Edit</a>
-                                                            <a href="process.php?id=<?=$row['id']?>&action=delete" class="label theme-bg text-white f-12">Delete</a>
-                                                        </td>
-							                        </tr>
-							                        <?php 
-							                        }
-							                        ?>
-							                    </tbody>
-							                </table>
-							            </div>
-							        </div>
-							    </div>
-							</div>
+							<div class="row">
+                                <div class="col-sm-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>User</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <h5>Add User</h5>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <form method="post" action="process.php?action=edit">
+                                                    	<input type="hidden" value="<?=$table_row['id']?>" name="id">
+                                                        <div class="form-group">
+                                                            <label for="tableInput">Table Number</label>
+                                                            <input type="text" class="form-control" id="tableInput" name="table" 
+                                                         	value="<?=$table_row['number']?>" aria-describedby="tableHelp" placeholder="Enter table number" onkeyup="this.value=this.value.toUpperCase()" required >
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="seatsInput">Seats</label>
+                                                            <input type="number" class="form-control" id="seatsInput" name="seats" 
+                                                            value="<?=$table_row['seats']?>" aria-describedby="seatsHelp" placeholder="Enter Your seats" required >
+                                                            <small id="seatsHelp" class="form-text text-muted">Fill with your active seats.</small>
+                                                        </div>
+                                                        <div class="custom-control custom-radio custom-control-inline">
+                                                            <input type="radio" id="customRadioInline1" name="status" class="custom-control-input" value="1" required <?=($table_row['status'])?"checked":""?>>
+                                                            <label class="custom-control-label" for="customRadioInline1">Available</label>
+                                                        </div>
+                                                        <div class="custom-control custom-radio custom-control-inline">
+                                                            <input type="radio" id="customRadioInline2" name="status" class="custom-control-input" value="0" required <?=($table_row['status'])?"":"checked"?>>
+                                                            <label class="custom-control-label" for="customRadioInline2">Not Available</label>
+                                                        </div>
+                                                        <hr>
+                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 							<!-- [ Table ] end -->							
 
                             <!-- [ Main Content ] end -->
@@ -182,12 +171,12 @@ $table = new Table;
     <!-- Warning Section Ends -->
 
     <!-- Required Js -->
-	<script src="../datta-lite/assets/js/vendor-all.min.js"></script>
+    <script src="../datta-lite/assets/js/vendor-all.min.js"></script>
 	<script src="../datta-lite/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="../datta-lite/assets/js/pcoded.min.js"></script>
     <script>
         $('document').ready(function(){
-            $(".order-nav").addClass("active");
+            $(".table-nav").addClass("active");
         });
     </script>
 

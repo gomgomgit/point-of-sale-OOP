@@ -1,10 +1,10 @@
-<!-- [ navigation menu ] start -->
+[ navigation menu ] start -->
 <nav class="pcoded-navbar">
     <div class="navbar-wrapper">
         <div class="navbar-brand header-logo">
-            <a href="index.html" class="b-brand">
+            <a href="../home/index.php" class="b-brand">
                 <div class="b-bg">
-                    <i class="feather icon-trending-up"></i>
+                    <i class="feather icon-at-sign"></i>
                 </div>
                 <span class="b-title">Point_Of_Sale</span>
             </a>
@@ -36,15 +36,14 @@
                 <li data-username="form elements advance componant validation masking wizard picker select" class="nav-item item-nav">
                     <a href="../item/index.php" class="nav-link "><span class="pcoded-micon"><i class="feather icon-grid"></i></span><span class="pcoded-mtext">Item</span></a>
                 </li>
-                <li data-username="Authentication Sign up Sign in reset password Change password Personal information profile settings map form subscribe" class="nav-item pcoded-hasmenu order-nav">
-                    <a href="javascript:" class="nav-link"><span class="pcoded-micon"><i class="feather icon-shopping-cart"></i></span><span class="pcoded-mtext">Order</span></a>
-                    <ul class="pcoded-submenu">
-                        <li class=""><a href="../order/index.php" class="" target="_blank">Order</a></li>
-                        <li class=""><a href="auth-signin.html" class="" target="_blank">Order Detail</a></li>
-                    </ul>
+                <li data-username="form elements advance componant validation masking wizard picker select" class="nav-item table-nav">
+                    <a href="../table/index.php" class="nav-link "><span class="pcoded-micon"><i class="feather icon-book"></i></span><span class="pcoded-mtext">Table</span></a>
+                </li>
+                <li data-username="form elements advance componant validation masking wizard picker select" class="nav-item order-nav">
+                    <a href="../order/index.php" class="nav-link "><span class="pcoded-micon"><i class="feather icon-shopping-cart"></i></span><span class="pcoded-mtext">Order</span></a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
-<!-- [ navigation menu ] end -->
+<!-- [ navigation menu ] end

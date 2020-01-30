@@ -8,11 +8,13 @@ use point_of_sale\config\Table;
 
 if (isset($_SESSION['email'])) {
 
+$order_id = $_GET['id'];
 $order = new Order;
-$data_order = $order->show_order();
+$data_order = $order->get_by_id($order_id);
+$data_detail = $order->show_detail_order($order_id);
 
 $table = new Table;
-
+$table_row = $table->get_by_id($data_order['table_number']);
 
 ?>
 
@@ -74,49 +76,78 @@ $table = new Table;
                             <!-- [ Main Content ] start -->
                             
 							<!-- [ Table ] start -->
+                            <div class="col-xl-12">
+                                <div class="card Recent-Users">
+                                    <div class="card-header">
+                                        <h5>Order</h5>
+                                    </div>
+                                    <div class="card-block table-border-style">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th width="20%">Table</th>
+                                                        <th width="25%">User</th>
+                                                        <th width="30%">Total</th>
+                                                        <th width="20%">Date</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><?= $table_row['number']; ?> : with <?=$table_row['seats']?> seats</td>
+                                                        <td><?= $data_order['user']; ?></td>
+                                                        <td>Rp. <?= $data_order['total']; ?>;</td>
+                                                        <td><?= $data_order['date'];?></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 							<div class="col-xl-12">
 							    <div class="card Recent-Users">
 							        <div class="card-header">
-							            <h5>Order</h5>
+							            <h5>Detail Order</h5>
 							        </div>
 							        <div class="card-block table-border-style">
-							        	<button class="btn btn-primary"><a class="text-light" href="add_order.php"><i class="feather icon-plus"></i> Add Order</a></button>
+                                        <button class="btn btn-primary"><a class="text-light" href="add_order_detail.php?id=<?=$data_order['id']?>"><i class="feather icon-plus"></i> Add Order to Detail</a></button>
 							            <div class="table-responsive">
 							                <table class="table table-hover">
 							                    <thead>
 							                        <tr>
 							                            <th>No</th>
-                                                        <th>Table</th>
-                                                        <th>User</th>
+                                                        <th>Item</th>
+                                                        <th>Price</th>
+                                                        <th>Qty</th>
                                                         <th>Total</th>
-                                                        <th>Date</th>
-                                                        <th>Detail</th>
                                                         <th>Action</th>
 							                        </tr>
 							                    </thead>
 							                    <tbody>
 							                        <?php 
 							                        $no = 1;
-							                        foreach ($data_order as $row) {
-                                                        $table_row = $table->get_by_id($row['table_number']);
+							                        foreach ($data_detail as $row) {
 							                        ?>
 							                        <tr>
 							                            <th scope="row"><?= $no++ ?></th>
-                                                        <td><?= $table_row['number']; ?> : with <?=$table_row['seats']?> seats</td>
-                                                        <td><?= $row['user']; ?></td>
-                                                        <td><?= $row['total']; ?></td>
-                                                        <td><?= $row['date'];?></td>
-							                            <td>
-							                            	<a href="detail.php?id=<?=$row['id']?>" class="label theme-bg2 text-white f-12">Detail</a>
-							                            </td>
+                                                        <td><?= $row['item']; ?></td>
+                                                        <td>Rp. <?= $row['price']; ?>;</td>
+                                                        <td><?= $row['qty']; ?></td>
+                                                        <td>Rp. <p class="total-detail d-inline"><?= $row['total'];?></p>;</td>
                                                         <td>
-                                                            <a href="edit.php?id=<?=$row['id']?>" class="label theme-bg2 text-white f-12">Edit</a>
-                                                            <a href="process.php?id=<?=$row['id']?>&action=delete" class="label theme-bg text-white f-12">Delete</a>
+                                                            <a href="edit_detail.php?id=<?=$row['id']?>" class="label theme-bg2 text-white f-12">Edit</a>
+                                                            <a href="process.php?id=<?=$row['id']?>&order=<?=$order_id?>&action=delete_detail" class="label theme-bg text-white f-12">Delete</a>
                                                         </td>
 							                        </tr>
 							                        <?php 
 							                        }
 							                        ?>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td colspan="3"><h5 class="text-dark font-weight-bold">TOTAL</h5></td>
+                                                        <td><h5 class="text-dark d-inline font-weight-bold">Rp. <h5 class="d-inline font-weight-bold" id="total"></h5>;</h5></td>
+                                                    </tr>
 							                    </tbody>
 							                </table>
 							            </div>
@@ -188,6 +219,15 @@ $table = new Table;
     <script>
         $('document').ready(function(){
             $(".order-nav").addClass("active");
+
+
+            var total = 0;
+            $('.total-detail').each(function() {
+                var value = $(this).text();
+                total += parseInt(value);
+            });
+            $('#total').html(total);
+
         });
     </script>
 
