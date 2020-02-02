@@ -72,7 +72,7 @@ if (isset($_SESSION['email'])) {
                                             <hr>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <form method="post" action="process.php?action=add">
+                                                    <form method="post" action="process.php?action=add" enctype="multipart/form-data">
                                                         <div class="form-group">
                                                             <label for="nameInput">Name</label>
                                                             <input type="text" class="form-control" id="nameInput" name="name" aria-describedby="emailHelp" placeholder="Enter Your name" required >
@@ -86,6 +86,12 @@ if (isset($_SESSION['email'])) {
                                                             <label for="passwordInput">Password</label>
                                                             <input type="password" class="form-control" id="passwordInput" name="password" aria-describedby="passwordHelp" placeholder="Enter your password" required >
                                                             <small id="passwordHelp" class="form-text text-muted">We never showing your password on the pages.</small>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="form-label">Avatar</label>
+                                                            <div>
+                                                                <input type="file" class="validation-file" name="avatar">
+                                                            </div>
                                                         </div>
                                                         <button type="submit" class="btn btn-primary">Submit</button>
                                                     </form>

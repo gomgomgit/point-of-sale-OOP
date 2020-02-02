@@ -43,6 +43,16 @@ class Table extends Database
 		{
 			mysqli_query($this->connect, "DELETE FROM tablee WHERE id = '$id'");
 		}
+		public function total()
+		{
+			$total = current(mysqli_query($this->connect, "SELECT COUNT(*) FROM tablee")->fetch_assoc());
+			return($total);
+		}
+		public function seats()
+		{
+			$total = current(mysqli_query($this->connect, "SELECT SUM(seats) FROM tablee")->fetch_assoc());
+			return($total);
+		}
 	}
 
 

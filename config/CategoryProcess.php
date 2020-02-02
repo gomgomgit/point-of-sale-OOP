@@ -36,6 +36,11 @@ class Category extends Database
 		{
 			mysqli_query($this->connect, "DELETE FROM category WHERE id = '$id'");
 		}
+		public function total()
+		{
+			$total = current(mysqli_query($this->connect, "SELECT COUNT(*) FROM category")->fetch_assoc());
+			return($total);
+		}
 	}
 
 

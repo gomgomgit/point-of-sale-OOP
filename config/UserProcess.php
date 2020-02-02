@@ -18,22 +18,27 @@ class User extends Database
 			}
 			return $data;
 		}
-		public function insert_data($name, $email, $password)
+		public function insert_data($name, $email, $password, $avatar)
 		{
-			mysqli_query($this->connect, "INSERT INTO user (name, email, password) VALUES ('$name', '$email', '$password')");
+			mysqli_query($this->connect, "INSERT INTO user (name, email, password, avatar) VALUES ('$name', '$email', '$password', '$avatar')");
 		}
 		public function get_by_id($id)
 		{
 			$query = mysqli_query($this->connect, "SELECT * FROM user WHERE id = '$id'");
 			return $query->fetch_assoc();
 		}
-		public function update_data($id, $name, $email, $password)
+		public function update_data($id, $name, $email, $password, $avatar)
 		{
-			mysqli_query($this->connect, "UPDATE user SET name = '$name', email = '$email', password = '$password' WHERE id = '$id'");
+			mysqli_query($this->connect, "UPDATE user SET name = '$name', email = '$email', password = '$password', avatar = '$avatar' WHERE id = '$id'");
 		}
 		public function delete_data($id)
 		{
 			mysqli_query($this->connect, "DELETE FROM user WHERE id = '$id'");
+		}
+		public function total()
+		{
+			$total = current(mysqli_query($this->connect, "SELECT COUNT(*) FROM user")->fetch_assoc());
+			return($total);
 		}
 	}
 

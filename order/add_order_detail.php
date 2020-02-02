@@ -186,7 +186,6 @@ $row_table = $table->get_by_id($order_detail['table_number']);
 
 
                                                 <div>
-                                                    <button class="btn btn-primary" id="add_item"><a class="text-light"><i class="feather icon-plus"></i> Add Item</a></button>
                                                 </div>
                                             </div>
 

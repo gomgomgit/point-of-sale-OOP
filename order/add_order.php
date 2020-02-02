@@ -202,7 +202,7 @@ $table_ava = $table->show_available();
     
                             <!-- [ Table ] start -->
                             <div class="col-xl-12">
-                                <div class="card Recent-Users">
+                                <div class="card Recent-Users"> 
                                     <div class="card-header">
                                         <h5>Cart</h5>
                                     </div>
@@ -226,10 +226,7 @@ $table_ava = $table->show_available();
                                                 </div>
                                                 <input type="hidden" name="user" value="<?=$_SESSION['id']?> ">
 
-
-
                                                 <div>
-                                                    <button class="btn btn-primary" id="add_item"><a class="text-light"><i class="feather icon-plus"></i> Add Item</a></button>
                                                 </div>
                                             </div>
 

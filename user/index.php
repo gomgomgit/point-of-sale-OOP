@@ -93,7 +93,12 @@ $data_user = $user->show_data();
 							                        ?>
 							                        <tr>
 							                            <th scope="row"><?= $no++ ?></th>
-							                            <td><?= $row['name']; ?></td>
+							                            <td>
+                                                            <div class="avatar d-inline-block mr-3" style="width: 40px; height: 40px;">
+                                                                <img src="../avatar/<?=$row['avatar']?>" alt="" width="100%">
+                                                            </div>
+                                                            <?= $row['name']; ?>        
+                                                        </td>
                                                         <td><?= $row['email']; ?></td>
 							                            <td>
 							                            	<a href="edit.php?id=<?=$row['id']?>" class="label theme-bg2 text-white f-12">Edit</a>

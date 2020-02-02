@@ -45,18 +45,18 @@ class Order extends Database
 		$stock = $stock_item->fetch_array();
 		$stock = $stock['stock'];
 		$stock_now = $stock - $qty;
-		var_dump($stock_item);
+		// var_dump($stock_item);
 		mysqli_query($this->connect, "UPDATE item SET stock = '$stock_now' WHERE id = '$item'");
 	}
 	public function add_orderdetail($order_id, $item, $qty, $total) 
 	{
 		mysqli_query($this->connect, "INSERT INTO order_detail (order_id, item_id, qty, total) VALUES ('$order_id', '$item', '$qty', '$total')"); 
-		$stock = mysqli_query($this->connect, "SELECT stock FROM item WHERE id = '$item'");
-		$stock = $stock->fetch_array();
-		$stock = $stock['stock'] ;
+		$stock = current(mysqli_query($this->connect, "SELECT stock FROM item WHERE id = '$item'")->fetch_array());
+		// $stock = $stock->fetch_array();
+		// $stock = $stock['stock'] ;
 		$stock_now = $stock - $qty;
-		var_dump($stock);
-		mysqli_query($this->connect, "UPDATE item SET stock = '$stock_now'");
+		// var_dump($stock);
+		mysqli_query($this->connect, "UPDATE item SET stock = '$stock_now' WHERE id = '$item'");
 	}
 	public function add_total_order($id, $total) 
 	{
@@ -93,18 +93,28 @@ class Order extends Database
 	}
 	public function delete_detail($id, $order)
 	{
-		$detail = mysqli_query($this->connect, "SELECT * FROM order_detail WHERE id = '$id'");
-		$detail = $detail->fetch_array();
-		$detail_total = $detail['total'];
-		$detail_order = $detail['order_id'];
+		// $detail = mysqli_query($this->connect, "SELECT * FROM order_detail WHERE id = '$id'");
+		// $detail = $detail->fetch_array();
+		// $detail_total = $detail['total'];
+		// $detail_order = $detail['order_id'];
 
-		$order = mysqli_query($this->connect, "SELECT * FROM orderr WHERE id = '$detail_order'");
-		$order = $order->fetch_array();
-		$order = $order['total'];
+		// $order = mysqli_query($this->connect, "SELECT * FROM orderr WHERE id = '$detail_order'");
+		// $order = $order->fetch_array();
+		// $order = $order['total'];
 
-		$new_total = $order - $detail_total;
+		// $new_total = $order - $detail_total;
 
+		
 		mysqli_query($this->connect, "DELETE FROM order_detail WHERE id ='$id'");
+
+		$new_total = current(mysqli_query($this->connect, "SELECT SUM(total) FROM order_detail where order_id = '$order'")->fetch_object());
+		// var_dump($new_total);
+
 		mysqli_query($this->connect, "UPDATE orderr SET total = '$new_total'");
+	}
+	public function check_table()
+	{
+		$table = current(mysqli_query($this->connect, "SELECT COUNT(status) FROM tablee WHERE status = 1")->fetch_assoc());
+		return($table);
 	}
 }

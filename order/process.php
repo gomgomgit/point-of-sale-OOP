@@ -14,7 +14,6 @@ if ($action == "add") {
 	{
 		$order->insert_orderdetail($_POST['hidden_item'][$count], $_POST['hidden_qty'][$count], $_POST['hidden_total'][$count]);
 	};
-
 	header ('location:index.php');
 } elseif ($action == "add-detail") {
 	for ($count = 0; $count<count($_POST['hidden_item']); $count++) 
@@ -33,6 +32,21 @@ if ($action == "add") {
 } elseif ($action == "delete_detail") {
 	$order->delete_detail($_GET['id'], $_GET['order']);
 	header ('location:detail.php?id='.$_GET["order"].'');
+} elseif ($action == "check_table") {
+	$table = $order->check_table();
+	if (empty($table)) {
+		header('location:add_order.php');
+	} else {
+	    echo "<script type='text/javascript'> //not showing me this
+	        swal(
+	            'Table sudah penuh',
+	            'mohon maaf atas kekurangan kami',
+	            'warning'
+	        );
+	        window.location.replace('index.php');
+	    </script>";
+	    // mysqli_close();
+	}
 }
 
 ?>

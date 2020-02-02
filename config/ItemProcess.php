@@ -59,4 +59,9 @@ class Item extends Database
 	{
 		mysqli_query($this->connect, "DELETE FROM item WHERE id = '$id'");
 	}
+	public function total()
+	{
+		$total = current(mysqli_query($this->connect, "SELECT COUNT(*) FROM item")->fetch_assoc());
+		return($total);
+	}
 }

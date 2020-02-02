@@ -97,8 +97,9 @@ $table = new Table;
 							                    <tbody>
 							                        <?php 
 							                        $no = 1;
-							                        foreach ($data_order as $row) {
-                                                        $table_row = $table->get_by_id($row['table_number']);
+                                                    if (isset($data_order)) {
+    							                        foreach ($data_order as $row) {
+                                                            $table_row = $table->get_by_id($row['table_number']);
 							                        ?>
 							                        <tr>
 							                            <th scope="row"><?= $no++ ?></th>
@@ -115,7 +116,7 @@ $table = new Table;
                                                         </td>
 							                        </tr>
 							                        <?php 
-							                        }
+							                        }}
 							                        ?>
 							                    </tbody>
 							                </table>

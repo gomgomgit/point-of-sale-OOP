@@ -81,7 +81,7 @@ $row = $user->get_by_id($id);
                                             <hr>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <form method="post" action="process.php?action=edit">
+                                                    <form method="post" action="process.php?action=edit" enctype="multipart/form-data">
                                                     	<input type="hidden" name="id" value="<?= $id ?>">
                                                         <div class="form-group">
                                                             <label for="nameInput">Name</label>
@@ -94,10 +94,18 @@ $row = $user->get_by_id($id);
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="passwordInput">Password</label>
-                                                            <input type="password" class="form-control" id="passwordInput" name="password" value="<?= $row['password'] ?>" aria-describedby="passwordHelp" placeholder="Enter your password" required >
-                                                            <small id="passwordHelp" class="form-text text-muted">We never showing your password on the pages.</small>
+                                                            <input type="password" class="form-control" id="passwordInput" name="password" aria-describedby="passwordHelp" placeholder="Enter your password" >
+                                                            <small id="passwordHelp" class="form-text text-muted">Let it empty if you won't change your password.</small>
+                                                            <input type="hidden" name="old_pass" value="<?=$row['password']?>">
                                                         </div>
-                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                        <div class="form-group">
+                                                        <label class="form-label">Avatar</label>
+                                                        <div>
+                                                        <input type="file" class="validation-file" name="avatar">
+                                                        <input type="hidden" name="old_avatar" value="<?=$row['avatar']?>">
+                                                        </div>
+                                                        </div>
+                                                        <button type="submit" class="btn btn-primary mt-3">Submit</button>
                                                     </form>
                                                 </div>
                                             </div>

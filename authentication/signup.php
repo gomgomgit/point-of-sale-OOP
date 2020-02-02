@@ -53,6 +53,12 @@
                         <div class="input-group mb-4">
                             <input type="password" class="form-control" placeholder="password" name="password">
                         </div>
+                        <div class="form-group">
+                            <div class="custom-file">
+                              <input type="file" class="custom-file-input" name="avatar" id="customFile">
+                              <label class="custom-file-label text-left" for="customFile">Avatar</label>
+                            </div>
+                        </div>
                         <div class="form-group text-left">
                             <div class="checkbox checkbox-fill d-inline">
                                 <input type="checkbox" name="checkbox-fill-1" id="checkbox-fill-1" checked="">
@@ -76,6 +82,13 @@
     <!-- Required Js -->
     <script src="../datta-lite/assets/js/vendor-all.min.js"></script>
 	<script src="../datta-lite/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script>
+    // Add the following code if you want the name of the file appear on select
+    $(".custom-file-input").on("change", function() {
+      var fileName = $(this).val().split("\\").pop();
+      $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+    </script>
 
 </body>
 </html>

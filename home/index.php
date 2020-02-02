@@ -4,19 +4,27 @@ session_start();
 require '../config/CategoryProcess.php';
 require '../config/UserProcess.php';
 require '../config/ItemProcess.php';
+require '../config/TableProcess.php';
 
 use point_of_sale\config\Category;
 use point_of_sale\config\User;
 use point_of_sale\config\Item;
+use point_of_sale\config\Table;
 
 if (isset($_SESSION['email'])) {
 
 $category = new Category;
 $user = new User;
 $item = new Item;
+$table = new Table;
 $data_user = $user->show_data();
+$total_user = $user->total();
 $data_item = $item->show_data();
+$total_item = $item->total();
 $data_category = $category->show_data();
+$total_category = $category->total();
+$total_table = $table->total();
+$total_seats = $table->seats();
 ?>
 
 <!DOCTYPE html>
@@ -75,6 +83,55 @@ $data_category = $category->show_data();
                     <div class="main-body">
                         <div class="page-wrapper">
                             <!-- [ Main Content ] start -->
+                            <!--[social-media section] start-->
+                            <div class="row">
+                                <div class="col-md-12 col-xl-4">
+                                    <div class="card card-social">
+                                        <div class="card-block border-bottom">
+                                            <div class="row align-items-center justify-content-center">
+                                                <div class="col-auto">
+                                                    <i class="fas fa-users text-primary f-36"></i>
+                                                </div>
+                                                <div class="col text-right">
+                                                    <h3><?=$total_user?> Users</h3>
+                                                    <h5 class="text-c-green mb-0">+7.2% <span class="text-muted">Total Likes</span></h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-xl-4">
+                                    <div class="card card-social">
+                                        <div class="card-block border-bottom">
+                                            <div class="row align-items-center justify-content-center">
+                                                <div class="col-auto">
+                                                    <i class="far fa-clipboard text-c-blue f-36"></i>
+                                                </div>
+                                                <div class="col text-right">
+                                                    <h3><?=$total_item?> Menu</h3>
+                                                    <h5 class="text-c-purple mb-0"><span class="text-muted">With <?=$total_category?> category</span></h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-xl-4">
+                                    <div class="card card-social">
+                                        <div class="card-block border-bottom">
+                                            <div class="row align-items-center justify-content-center">
+                                                <div class="col-auto">
+                                                    <i class="fas fa-table text-c-red f-36"></i>
+                                                </div>
+                                                <div class="col text-right">
+                                                    <h3><?=$total_table?> Table</h3>
+                                                    <h5 class="text-c-blue mb-0"><span class="text-muted">With <?=$total_seats?> Total Seats</span></h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--[social-media section] end-->
                             
 							<!-- [ Table ] start -->
 							<div class="col-md-12 m-b-30">
@@ -106,7 +163,12 @@ $data_category = $category->show_data();
 						                        ?>
 						                        <tr>
 						                            <th scope="row"><?= $no++ ?></th>
-						                            <td><?= $row['name']; ?></td>
+                                                    <td>
+                                                        <div class="avatar d-inline-block mr-3" style="width: 40px; height: 40px;">
+                                                            <img src="../avatar/<?=$row['avatar']?>" alt="" width="100%">
+                                                        </div>
+                                                        <?= $row['name']; ?>        
+                                                    </td>
                                                     <td><?= $row['email']; ?></td>
 						                        </tr>
 						                        <?php 
