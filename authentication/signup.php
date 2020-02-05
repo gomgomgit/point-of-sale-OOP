@@ -42,7 +42,7 @@
                     <div class="mb-4">
                         <i class="feather icon-user-plus auth-icon"></i>
                     </div>
-                    <form action="process.php?action=signup" method="post">
+                    <form action="process.php?action=signup" method="post" enctype="multipart/form-data">
                         <h3 class="mb-4">Sign up</h3>
                         <div class="input-group mb-3">
                             <input type="text" class="form-control" placeholder="Name" name="name">
@@ -73,7 +73,7 @@
                         </div>
                         <button class="btn btn-primary shadow-2 mb-4">Sign up</button>
                     </form>
-                    <p class="mb-0 text-muted">Allready have an account? <a href="auth-signin.html"> Log in</a></p>
+                    <p class="mb-0 text-muted">Allready have an account? <a href="login.php"> Log in</a></p>
                 </div>
             </div>
         </div>

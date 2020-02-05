@@ -12,6 +12,7 @@ $order = new Order;
 $data_order = $order->show_order();
 
 $table = new Table;
+$check_table = $table->check_table();
 
 
 ?>
@@ -80,7 +81,7 @@ $table = new Table;
 							            <h5>Order</h5>
 							        </div>
 							        <div class="card-block table-border-style">
-							        	<button class="btn btn-primary"><a class="text-light" href="add_order.php"><i class="feather icon-plus"></i> Add Order</a></button>
+							        	<button class="btn btn-primary"><a class="text-light add" href="#" ><i class="feather icon-plus"></i> Add Order</a></button>
 							            <div class="table-responsive">
 							                <table class="table table-hover">
 							                    <thead>
@@ -186,12 +187,27 @@ $table = new Table;
 	<script src="../datta-lite/assets/js/vendor-all.min.js"></script>
 	<script src="../datta-lite/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="../datta-lite/assets/js/pcoded.min.js"></script>
+
+    <!-- Sweat Alert 2 -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <script>
         $('document').ready(function(){
             $(".order-nav").addClass("active");
         });
+        $(".add").click(function(){
+            var check_table = '<?=$check_table?>';
+            if (check_table > 0) {
+                window.location.href = "./add_order.php";
+            } else {
+                swal(
+                    'Meja sudah penuh',
+                    'mohon maaf atas kekurangan kami',
+                    'warning'
+                );
+            }
+        })
     </script>
-
 </body>
 </html>
 <?php 

@@ -87,7 +87,7 @@ $data_category = $category->show_data();
                                             <hr>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <form method="post" action="process.php?action=edit">
+                                                    <form method="post" action="process.php?action=edit" enctype="multipart/form-data">
                                                     	<input type="hidden" name="id" value="<?= $id ?>">
                                                         <div class="form-group">
                                                             <label for="nameInput">Name</label>
@@ -115,6 +115,13 @@ $data_category = $category->show_data();
                                                             <label for="stockInput">Stock</label>
                                                             <input type="number" class="form-control" id="stockInput" name="stock" aria-describedby="stockHelp" value="<?= $row_item['stock'] ?>" placeholder="Enter Stock Item" required >
                                                             <small id="stockHelp" class="form-text text-muted">Fill with stock of menu.</small>
+                                                        </div>
+                                                        <div class="form-group">
+                                                        <label class="form-label">Menu Image</label>
+                                                            <div>
+                                                                <input type="file" class="validation-file" name="menu">
+                                                                <input type="hidden" name="old_menu" value="<?=$row_item['image']?>">
+                                                            </div>
                                                         </div>
                                                         <button type="submit" class="btn btn-primary">Submit</button>
                                                     </form>

@@ -81,7 +81,7 @@ $row_order = $order->get_by_id($id);
                                             <h5>Order</h5>
                                         </div>
                                         <div class="card-body">
-                                            <h5>Add Order</h5>
+                                            <h5>edit</h5>
                                             <hr>
                                             <div class="row">
                                                 <div class="col-md-12">

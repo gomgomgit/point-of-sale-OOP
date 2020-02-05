@@ -35,9 +35,9 @@ class Item extends Database
 		}
 		return $data;
 	}
-	public function insert_data($category, $name, $price, $stock)
+	public function insert_data($category, $name, $price, $stock, $image)
 	{
-		mysqli_query($this->connect, "INSERT INTO item (category_id, name, price, stock) VALUES ('$category', '$name', '$price', '$stock')");
+		mysqli_query($this->connect, "INSERT INTO item (category_id, name, price, stock, image) VALUES ('$category', '$name', '$price', '$stock', '$image')");
 	}
 	public function get_by_id($id)
 	{
@@ -51,9 +51,9 @@ class Item extends Database
 		
 		return $row;
 	}
-	public function update_data($id, $category, $name, $price, $stock)
+	public function update_data($id, $category, $name, $price, $stock, $image)
 	{
-		mysqli_query($this->connect, "UPDATE item SET category_id = '$category', name = '$name', price = '$price', stock = '$stock' WHERE id = '$id'");
+		mysqli_query($this->connect, "UPDATE item SET category_id = '$category', name = '$name', price = '$price', stock = '$stock', image = '$image' WHERE id = '$id'");
 	}
 	public function delete_data($id)
 	{

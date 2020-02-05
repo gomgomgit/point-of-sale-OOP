@@ -17,7 +17,9 @@
     <meta name="keywords" content="admin templates, bootstrap admin templates, bootstrap 4, dashboard, dashboard templets, sass admin templets, html admin templates, responsive, bootstrap admin templates free download,premium bootstrap admin templates, datta able, datta able bootstrap admin template, free admin theme, free dashboard template"/>
     <meta name="author" content="CodedThemes"/>
     <meta http-equiv="refresh" content="3;url=authentication/login.php">
-
+    
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css?family=Maven+Pro:900&display=swap" rel="stylesheet">
     <!-- Favicon icon -->
     <link rel="icon" href="datta-lite/assets/images/favicon.ico" type="image/x-icon">
     <!-- fontawesome icon -->
@@ -42,8 +44,8 @@
                 <span class="r"></span>
             </div>
             <div>
-                <h1 class="font-weight-bold position-absolute" style="font-size: 70px; top: -60px; color: #333f54; border-bottom: 5px solid #333; font-weight: 700;" data-aos="fade-up" data-aos-duration="900">WELCOME</h1>
-                <p class="font-weight-bold position-absolute text-dark m-auto text-center pt-3" data-aos="fade-up" data-aos-duration="900" data-aos-delay="400" style="font-weight: 30px;">Let's Find A Bugs</p>
+                <h1 class="font-weight-bold position-absolute" style="font-family: 'Maven Pro', sans-serif;font-size: 70px; top: -60px; color: #333f54; border-bottom: 5px solid #333f54; font-weight: 900;" data-aos="fade-up" data-aos-duration="900">WELCOME</h1>
+                <p class="font-weight-bold position-absolute text-dark m-auto text-center pt-4 pl-2" data-aos="fade-up" data-aos-duration="800" data-aos-delay="400" style="font-size: 16px;">Let's Find A Bugs...!</p>
             </div>
         </div>
     </div>

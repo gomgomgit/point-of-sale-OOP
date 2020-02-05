@@ -14,14 +14,14 @@ if ($action == "add") {
 	if (empty($avatar_name)) {
 		$avatar_user = "avatar-".rand(1,5).".jpg";
 	} else {
-		$avatar_user =  ($_POST['name'].$_POST['id'].".jpg");
+		$avatar_user =  ($_POST['name'].rand(1,100).".jpg");
 		$avatar_user =  str_replace(" ", "", $avatar_user);
 
 		move_uploaded_file($tmp_name, "../avatar/".$avatar_user);
 	}
 
 	$user->insert_data($_POST['name'], $_POST['email'], $pass, $avatar_user);
-	// header('location:index.php');
+	header('location:index.php');
 } elseif ($action == "edit") {
 	if (empty($_POST['password'])) {
 		$pass = $_POST['old_pass'];

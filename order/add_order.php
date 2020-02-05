@@ -165,7 +165,7 @@ $table_ava = $table->show_available();
                                                 ?>
                                                 <div class="col-4"> 
                                                     <div class="bg-dark mb-3" style="overflow: hidden;">
-                                                        <img src="https://www.ajnn.net/files/images/20170505-jamaican-ganja.jpg" alt="">
+                                                        <img src="../menu/<?=$iwc['image']?>" alt="" style="width: 100%">
                                                     </div>
                                                     <div class="">
                                                         <h3><?= $iwc['name'] ?></h3>

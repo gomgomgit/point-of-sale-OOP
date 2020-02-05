@@ -1,4 +1,4 @@
-<?php 
+    <?php 
 session_start();
 require '../config/OrderProcess.php';
 require '../config/TableProcess.php';
@@ -136,7 +136,7 @@ $table_row = $table->get_by_id($data_order['table_number']);
                                                         <td><?= $row['qty']; ?></td>
                                                         <td>Rp. <p class="total-detail d-inline"><?= $row['total'];?></p>;</td>
                                                         <td>
-                                                            <a href="edit_detail.php?id=<?=$row['id']?>" class="label theme-bg2 text-white f-12">Edit</a>
+                                                            <!-- <a href="edit_detail.php?id=<?=$row['id']?>" class="label theme-bg2 text-white f-12">Edit</a> -->
                                                             <a href="process.php?id=<?=$row['id']?>&order=<?=$order_id?>&action=delete_detail" class="label theme-bg text-white f-12">Delete</a>
                                                         </td>
 							                        </tr>

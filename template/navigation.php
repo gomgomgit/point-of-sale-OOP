@@ -12,12 +12,12 @@
         </div>
         <div class="navbar-content scroll-div">
             <ul class="nav pcoded-inner-navbar">
-                <li class="nav-item pcoded-menu-caption">
+                <!-- <li class="nav-item pcoded-menu-caption">
                     <label>Navigation</label>
                 </li>
                 <li data-username="dashboard Default Ecommerce CRM Analytics Crypto Project" class="nav-item">
                     <a href="../datta-lite/index.html" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
-                </li>
+                </li> -->
                 <li class="nav-item pcoded-menu-caption">
                     <label>Home</label>
                 </li>

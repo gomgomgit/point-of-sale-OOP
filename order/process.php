@@ -43,7 +43,6 @@ if ($action == "add") {
 	            'mohon maaf atas kekurangan kami',
 	            'warning'
 	        );
-	        window.location.replace('index.php');
 	    </script>";
 	    // mysqli_close();
 	}

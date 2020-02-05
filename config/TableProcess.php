@@ -24,7 +24,7 @@ class Table extends Database
 			while ($row = mysqli_fetch_array($query)) {
 				$data[] = $row;
 			}
-			return $data;
+			if (isset($data)) {return $data;};
 		}
 		public function insert_data($number, $seats, $status)
 		{
@@ -52,6 +52,11 @@ class Table extends Database
 		{
 			$total = current(mysqli_query($this->connect, "SELECT SUM(seats) FROM tablee")->fetch_assoc());
 			return($total);
+		}
+		public function check_table()
+		{
+			$table = current(mysqli_query($this->connect, "SELECT COUNT(status) FROM tablee WHERE status = 1")->fetch_assoc());
+			return($table);
 		}
 	}
 
